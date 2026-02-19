@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Налаштування теми для Tailwind v4 */
+@theme {
+  --color-nomo-red: #4D0011;
+  --color-nomo-beige: #FFF6EA;
+  
+  --font-tenor: "Tenor Sans", serif;
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+/* Скидаємо базові стилі, щоб вони не заважали */
+@layer base {
+  body {
+    @apply bg-nomo-red text-nomo-beige font-montserrat m-0 antialiased;
+    min-height: 100vh;
+  }
+
+  /* Робимо плавний скрол для сайту */
+  html {
+    scroll-behavior: smooth;
+  }
+}
