@@ -1,5 +1,10 @@
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
+import About from './sections/About';
+import Services from './sections/Services';
+import Team from './sections/Team';
+import Contacts from './sections/Contacts';
+import Testimonials from './sections/Testimionials';
 
 function App() {
   return (
@@ -7,6 +12,11 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <Services/>
+        <About/>
+        <Team/>
+        <Contacts/>
+        <Testimonials/>
         {/* Тут будуть інші секції */}
       </main>
     </div>
