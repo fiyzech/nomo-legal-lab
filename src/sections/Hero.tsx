@@ -7,10 +7,10 @@ const Hero = () => {
     <section className="relative bg-nomo-red text-nomo-beige pt-20 pb-40 overflow-hidden min-h-[80vh] flex flex-col justify-center">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="max-w-3xl">
-          <h2 className="font-montserrat text-sm md:text-base font-semibold uppercase tracking-[0.3em] mb-4">
+          <h2 className="font-montserrat text-sm md:text-2xl font-semibold uppercase tracking-[0.3em] mb-4">
             NOMO legal hub —
           </h2>
-          <p className="font-tenor text-3xl md:text-5xl leading-tight opacity-90">
+          <p className="font-montserrat text-sm md:text-xl leading-tight opacity-90">
             це простір юридичних рішень для бізнесу та фізичних осіб.
           </p>
         </div>

@@ -1,20 +1,20 @@
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
 import About from './sections/About';
-import Services from './sections/Services';
-import Team from './sections/Team';
+import {Team} from './sections/Team';
+import {Services} from './sections/Services';
 import Contacts from './sections/Contacts';
 import Testimonials from './sections/Testimionials';
 
 function App() {
   return (
     <div className="min-h-screen bg-nomo-red selection:bg-nomo-beige selection:text-nomo-red">
-      <Navbar />
+      <Navbar/>
       <main>
-        <Hero />
-        <Services/>
+        <Hero/>
         <About/>
         <Team/>
+        <Services/>
         <Contacts/>
         <Testimonials/>
         {/* Тут будуть інші секції */}

@@ -1,23 +1,21 @@
 @import "tailwindcss";
 
-/* Налаштування теми для Tailwind v4 */
+/* Підключення шрифтів прямо в CSS */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tenor+Sans&display=swap');
+
 @theme {
-  --color-nomo-red: #4D0011;
-  --color-nomo-beige: #FFF6EA;
-  
+  /* Твої фірмові кольори [cite: 6, 40-42] */
+  --color-nomo-red: #4d0011;
+  --color-nomo-beige: #fff6ea;
+
+  /* Точні назви шрифтів */
   --font-tenor: "Tenor Sans", serif;
   --font-montserrat: "Montserrat", sans-serif;
 }
 
-/* Скидаємо базові стилі, щоб вони не заважали */
 @layer base {
   body {
-    @apply bg-nomo-red text-nomo-beige font-montserrat m-0 antialiased;
-    min-height: 100vh;
-  }
-
-  /* Робимо плавний скрол для сайту */
-  html {
+    @apply bg-nomo-red text-nomo-beige font-montserrat antialiased m-0 p-0;
     scroll-behavior: smooth;
   }
 }
