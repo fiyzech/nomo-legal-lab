@@ -25,7 +25,7 @@ const testimonials: Testimonial[] = [
 
 const Testimonials = () => {
   return (
-    <section className="bg-nomo-red text-nomo-beige py-32 px-6 border-t border-nomo-beige/5">
+    <section className="bg-nomo-beige text-nomo-red py-32 px-6 border-t border-nomo-red/5">
       <div className="container mx-auto max-w-5xl">
         <h2 className="font-tenor text-3xl uppercase mb-20 text-center tracking-widest">
           Результати нашої роботи
