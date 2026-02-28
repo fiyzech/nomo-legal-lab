@@ -2,16 +2,14 @@ import { motion } from 'framer-motion';
 
 /**
  * @interface Partner
- * Структура об'єкта партнера (готова для підключення CMS)
  */
 interface Partner {
   id: string | number;
   name: string;
-  logoUrl: string; // URL картинки з адмінки
-  websiteUrl?: string; // Лінк на сайт партнера (опціонально)
+  logoUrl: string; 
+  websiteUrl?: string; 
 }
 
-// Тимчасові дані. Потім цей масив буде приходити з бази даних/CMS
 const mockPartners: Partner[] = [
   { id: 1, name: "Finance Group", logoUrl: "" },
   { id: 2, name: "Tech Invest", logoUrl: "" },
@@ -21,7 +19,7 @@ const mockPartners: Partner[] = [
 
 const Partners = () => {
   return (
-    <section className="bg-nomo-beige text-nomo-red py-32 px-6 border-t border-nomo-red/5">
+    <section className="bg-nomo-red text-nomo-beige py-32 px-6 border-t border-nomo-beige/5">
       <div className="container mx-auto max-w-5xl">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -32,7 +30,6 @@ const Partners = () => {
           Наші партнери
         </motion.h2>
         
-        {/* Сітка логотипів: 2 в ряд на мобілці, 4 в ряд на десктопі */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {mockPartners.map((partner, index) => (
             <motion.div 
@@ -48,12 +45,14 @@ const Partners = () => {
                   href={partner.websiteUrl} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="w-full aspect-video flex items-center justify-center border border-nomo-red/10 hover:border-nomo-red/30 transition-colors bg-white/50"
+                  /* ВИПРАВЛЕНО: border-nomo-beige/10, hover:border-nomo-beige/40, bg-nomo-beige/5 */
+                  className="w-full aspect-video flex items-center justify-center border border-nomo-beige/10 hover:border-nomo-beige/40 transition-colors bg-nomo-beige/5"
                 >
                   <PartnerLogo partner={partner} />
                 </a>
               ) : (
-                <div className="w-full aspect-video flex items-center justify-center border border-nomo-red/10 bg-white/50 grayscale hover:grayscale-0 transition-all duration-300">
+                /* ВИПРАВЛЕНО КОЛЬОРИ ТУТ ТАКОЖ */
+                <div className="w-full aspect-video flex items-center justify-center border border-nomo-beige/10 bg-nomo-beige/5 grayscale hover:grayscale-0 transition-all duration-300">
                   <PartnerLogo partner={partner} />
                 </div>
               )}
@@ -65,19 +64,17 @@ const Partners = () => {
   );
 };
 
-// Допоміжний компонент для рендеру логотипу або заглушки
 const PartnerLogo = ({ partner }: { partner: Partner }) => {
   if (partner.logoUrl) {
     return (
       <img 
         src={partner.logoUrl} 
         alt={`Логотип ${partner.name}`} 
-        className="max-h-12 max-w-[80%] object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+        className="max-h-12 max-w-[80%] object-contain opacity-50 group-hover:opacity-100 transition-opacity"
       />
     );
   }
   
-  // Якщо фотки з адмінки ще немає — показуємо стильну текстову заглушку
   return (
     <span className="font-montserrat text-xs md:text-sm font-semibold uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity text-center px-2">
       {partner.name}

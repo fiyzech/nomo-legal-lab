@@ -1,27 +1,24 @@
 import { useState, useRef } from 'react';
-import type { FormEvent } from 'react'; // Виправлено імпорт типів
+import type { FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-  // Використовуємо реф для доступу до полів форми при відправці
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  // Вказуємо тип події FormEvent<HTMLFormElement> для стабільної роботи TS
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('sending');
 
-    // ДАНІ З ВАШОГО EMAILJS АКАУНТУ
-    const SERVICE_ID = "service_67g6yv8"; // Ваш Service ID зі скріншоту
-    const TEMPLATE_ID = "template_no5tro4"; // Знайдіть у вкладці Email Templates
-    const PUBLIC_KEY = "ON_AkPMws6qLqDSsR";   // Знайдіть у вкладці Account -> API Keys
+    const SERVICE_ID = "service_67g6yv8"; 
+    const TEMPLATE_ID = "template_no5tro4"; 
+    const PUBLIC_KEY = "ON_AkPMws6qLqDSsR";   
 
     if (formRef.current) {
       emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
         .then(() => {
           setStatus('success');
-          formRef.current?.reset(); // Очищуємо поля після успіху
+          formRef.current?.reset(); 
           setTimeout(() => setStatus('idle'), 5000);
         })
         .catch((error) => {
@@ -33,7 +30,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="Контакти" className="bg-nomo-red text-nomo-beige py-32 px-6 md:px-16 relative overflow-hidden">
+    <section id="контакти" className="bg-nomo-beige text-nomo-red py-32 px-6 md:px-16 relative overflow-hidden">
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
         
         {/* Контактна інформація */}
@@ -43,13 +40,13 @@ const Contact = () => {
             Залиште заявку, і ми зв’яжемося з вами протягом 30 хвилин для первинної консультації.
           </p>
           <div className="space-y-4 font-montserrat font-medium uppercase text-sm tracking-widest">
-            <a href="tel:+380956047998" className="block hover:opacity-70 transition-opacity">
-              +380(97) 700-71-01
+            <a href="tel:+380977007101" className="block hover:opacity-70 transition-opacity">
+              +380 (97) 700-71-01
             </a>
             <a href="mailto:nomo.legalhub@gmail.com" className="block hover:opacity-70 transition-opacity">
               nomo.legalhub@gmail.com
             </a>
-            <p className="opacity-60">Місто Львів, Вулиця Франка 98</p>
+            <p className="opacity-60">м. Львів, вул. Франка, 98</p>
           </div>
         </div>
 
@@ -60,28 +57,31 @@ const Contact = () => {
             name="name" 
             type="text" 
             placeholder="Ім'я" 
-            className="bg-transparent border-b border-nomo-beige/30 py-4 focus:border-nomo-beige outline-none font-montserrat placeholder:text-nomo-beige/50 transition-colors" 
+            /* ВИПРАВЛЕНО: border-nomo-red, focus:border-nomo-red, placeholder:text-nomo-red */
+            className="bg-transparent border-b border-nomo-red/30 py-4 focus:border-nomo-red outline-none font-montserrat placeholder:text-nomo-red/50 text-nomo-red transition-colors" 
           />
           <input 
             required
             name="email" 
             type="email" 
-            placeholder="Email" 
-            className="bg-transparent border-b border-nomo-beige/30 py-4 focus:border-nomo-beige outline-none font-montserrat placeholder:text-nomo-beige/50 transition-colors" 
+            placeholder="Email / Телефон" 
+            /* ВИПРАВЛЕНО: border-nomo-red, focus:border-nomo-red, placeholder:text-nomo-red */
+            className="bg-transparent border-b border-nomo-red/30 py-4 focus:border-nomo-red outline-none font-montserrat placeholder:text-nomo-red/50 text-nomo-red transition-colors" 
           />
           <textarea 
             required
             name="message" 
             placeholder="Ваш запит" 
             rows={4} 
-            className="bg-transparent border-b border-nomo-beige/30 py-4 focus:border-nomo-beige outline-none font-montserrat resize-none placeholder:text-nomo-beige/50 transition-colors"
+            /* ВИПРАВЛЕНО: border-nomo-red, focus:border-nomo-red, placeholder:text-nomo-red */
+            className="bg-transparent border-b border-nomo-red/30 py-4 focus:border-nomo-red outline-none font-montserrat resize-none placeholder:text-nomo-red/50 text-nomo-red transition-colors"
           ></textarea>
           
           <button 
             disabled={status === 'sending'}
             className={`
-              relative py-5 uppercase tracking-[0.3em] text-xs font-bold transition-all duration-300 border border-nomo-beige
-              ${status === 'success' ? 'bg-green-700 text-white border-green-700' : 'bg-nomo-beige text-nomo-red hover:bg-transparent hover:text-nomo-beige'}
+              relative py-5 uppercase tracking-[0.3em] text-xs font-bold transition-all duration-300 border border-nomo-red
+              ${status === 'success' ? 'bg-green-700 text-white border-green-700' : 'bg-nomo-red text-nomo-beige hover:bg-transparent hover:text-nomo-red'}
               ${status === 'sending' ? 'opacity-50 cursor-wait' : 'active:scale-[0.97]'}
             `}
           >

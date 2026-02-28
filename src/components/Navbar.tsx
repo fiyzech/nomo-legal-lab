@@ -4,6 +4,12 @@ import { Menu, X } from 'lucide-react';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Допоміжна функція, щоб правильно генерувати лінки
+  const getLink = (item: string) => {
+    if (item === 'Блог') return '/blog'; // Блог веде на нову сторінку
+    return `/#${item.toLowerCase()}`;    // Все інше веде на головну до якорів
+  };
+
   return (
     <nav className="fixed w-full z-50 bg-nomo-red text-nomo-beige font-montserrat border-b border-nomo-beige/10">
       <div className="flex justify-between md:justify-start items-center px-6 md:px-12 py-4">
@@ -21,8 +27,12 @@ const Navbar = () => {
 
         {/* Десктопне меню */}
         <div className="hidden lg:flex gap-10 ml-16 text-[14px] uppercase tracking-widest font-medium">
-          {['Послуги', 'Про нас', 'Команда', 'Контакти'].map((item) => (
-            <a key={item} href={`#${item}`} className="hover:text-white/60 transition">
+          {['Послуги', 'Про нас', 'Команда', 'Блог', 'Контакти'].map((item) => (
+            <a 
+              key={item} 
+              href={getLink(item)} // Використовуємо нашу функцію
+              className="hover:text-white/60 transition"
+            >
               {item}
             </a>
           ))}
@@ -47,8 +57,14 @@ const Navbar = () => {
            <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6">
             <X size={32} />
           </button>
-          {['Послуги', 'Про нас', 'Команда', 'Контакти'].map((item) => (
-            <a key={item} href={`#${item}`} onClick={() => setIsOpen(false)}>{item}</a>
+          {['Послуги', 'Про нас', 'Команда', 'Блог', 'Контакти'].map((item) => (
+            <a 
+              key={item} 
+              href={getLink(item)} // Використовуємо нашу функцію
+              onClick={() => setIsOpen(false)}
+            >
+              {item}
+            </a>
           ))}
         </div>
       )}
