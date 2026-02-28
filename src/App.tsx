@@ -4,7 +4,8 @@ import About from './sections/About';
 import {Team} from './sections/Team';
 import {Services} from './sections/Services';
 import Contacts from './sections/Contacts';
-import Testimonials from './sections/Testimionials';
+import Partners from './sections/Partners';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Team/>
         <Services/>
         <Contacts/>
-        <Testimonials/>
+        <Partners/>
+        <Footer/>
         {/* Тут будуть інші секції */}
       </main>
     </div>

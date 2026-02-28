@@ -6,17 +6,21 @@ const Navbar = () => {
 
   return (
     <nav className="fixed w-full z-50 bg-nomo-red text-nomo-beige font-montserrat border-b border-nomo-beige/10">
-      <div className="flex justify-start items-center px-6 md:px-12 py-6">
-        {/* Логотип */}
-        <div className="flex flex-col items-center cursor-pointer">
-          <div className="border border-nomo-beige w-16 h-16 flex items-center justify-center">
-            <span className="font-tenor text-5xl">N</span>
-          </div>
-          <span className="font-tenor text-[8px] tracking-[0.4em] uppercase mt-1">Nomo</span>
+      <div className="flex justify-between md:justify-start items-center px-6 md:px-12 py-4">
+        
+        {/* Логотип-картинка */}
+        <div className="flex items-center cursor-pointer">
+          <a href="/">
+            <img 
+              src="/logo_nomo.png" 
+              alt="NOMO" 
+              className="h-[60px] md:h-[80px] w-auto object-contain" 
+            />
+          </a>
         </div>
 
         {/* Десктопне меню */}
-        <div className="hidden lg:flex gap-10 ml-12 text-[14px] uppercase tracking-widest font-medium">
+        <div className="hidden lg:flex gap-10 ml-16 text-[14px] uppercase tracking-widest font-medium">
           {['Послуги', 'Про нас', 'Команда', 'Контакти'].map((item) => (
             <a key={item} href={`#${item}`} className="hover:text-white/60 transition">
               {item}
@@ -25,20 +29,24 @@ const Navbar = () => {
         </div>
 
         {/* Бургер для мобілки */}
-        <div className="lg:hidden">
+        <div className="lg:hidden ml-auto">
           <button onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        <button className="hidden lg:block ml-auto border text-[14px] border-nomo-beige/40 px-6 py-2 text-[10px] uppercase tracking-widest hover:bg-nomo-beige hover:text-nomo-red transition-all">
+        {/* Кнопка */}
+        <button className="hidden lg:block ml-auto border border-nomo-beige/40 px-6 py-3 text-[11px] uppercase tracking-widest hover:bg-nomo-beige hover:text-nomo-red transition-all">
           Запис на консультацію
         </button>
       </div>
 
       {/* Мобільна панель */}
       {isOpen && (
-        <div className="lg:hidden bg-nomo-red h-screen w-full flex flex-col items-center justify-center gap-8 text-2xl font-tenor uppercase">
+        <div className="lg:hidden bg-nomo-red h-screen w-full flex flex-col items-center justify-center gap-8 text-2xl font-tenor uppercase fixed top-0 left-0 z-40">
+           <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6">
+            <X size={32} />
+          </button>
           {['Послуги', 'Про нас', 'Команда', 'Контакти'].map((item) => (
             <a key={item} href={`#${item}`} onClick={() => setIsOpen(false)}>{item}</a>
           ))}

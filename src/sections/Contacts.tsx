@@ -44,7 +44,7 @@ const Contact = () => {
           </p>
           <div className="space-y-4 font-montserrat font-medium uppercase text-sm tracking-widest">
             <a href="tel:+380956047998" className="block hover:opacity-70 transition-opacity">
-              +380(95) 604-79-98
+              +380(97) 700-71-01
             </a>
             <a href="mailto:nomo.legalhub@gmail.com" className="block hover:opacity-70 transition-opacity">
               nomo.legalhub@gmail.com
