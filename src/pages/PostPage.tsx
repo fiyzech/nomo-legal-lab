@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { client, urlFor } from '../sanityClient';
 import { PortableText } from '@portabletext/react';
+import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 
 interface PostData {
   title: string;
-  mainImage: any; 
-  body: any[]; 
+  mainImage: any;
+  body: any[];
   publishedAt: string;
+  category: string;
 }
 
 const PostPage = () => {
@@ -16,42 +18,59 @@ const PostPage = () => {
   const [post, setPost] = useState<PostData | null>(null);
 
   useEffect(() => {
+    // Запит GROQ: шукаємо статтю за її slug
     const query = `*[_type == "post" && slug.current == $slug][0]{
       title,
       mainImage,
       body,
-      publishedAt
+      publishedAt,
+      "category": categories[0]->title
     }`;
-    client.fetch(query, { slug }).then(setPost);
+    
+    client.fetch(query, { slug }).then(setPost).catch(console.error);
+    window.scrollTo(0, 0); // Прокрутка вгору при відкритті
   }, [slug]);
 
-  if (!post) return <div className="py-40 text-center font-montserrat uppercase tracking-widest opacity-50">Завантаження...</div>;
+  if (!post) return <div className="py-40 text-center font-tenor uppercase tracking-widest">Завантаження...</div>;
 
   return (
-    <article className="py-40 px-6 container mx-auto max-w-4xl bg-nomo-beige text-nomo-red min-h-screen">
-      <h1 className="text-4xl md:text-5xl font-tenor mb-8 uppercase tracking-widest leading-tight">
-        {post.title}
-      </h1>
-      
-      {post.mainImage && (
-        <div className="mb-12 overflow-hidden border border-nomo-red/10">
-          <img 
-            src={urlFor(post.mainImage).url()} 
-            className="w-full h-auto object-cover" 
-            alt={post.title} 
-          />
-        </div>
-      )}
+    <main className="bg-nomo-beige min-h-screen pt-32 pb-20 px-6">
+      <article className="container mx-auto max-w-3xl">
+        
+        {/* Кнопка назад */}
+        <Link to="/#блог" className="flex items-center gap-2 text-nomo-red/60 hover:text-nomo-red transition-colors mb-12 font-montserrat text-xs uppercase tracking-widest font-bold">
+          <ArrowLeft size={16} /> Назад до списку
+        </Link>
 
-      {/* 2. Виводимо реальний текст через PortableText */}
-      <div className="prose prose-lg font-montserrat leading-relaxed opacity-90 max-w-none">
-        {post.body ? (
-          <PortableText value={post.body} />
-        ) : (
-          <p>Ця стаття ще не має текстового наповнення.</p>
+        {/* Мета-дані */}
+        <div className="flex flex-wrap gap-6 mb-8 items-center text-[10px] uppercase tracking-[0.2em] font-bold text-nomo-red/50">
+          <span className="flex items-center gap-2"><Calendar size={12} /> {new Date(post.publishedAt).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          {post.category && <span className="flex items-center gap-2"><Tag size={12} /> {post.category}</span>}
+        </div>
+
+        {/* Заголовок */}
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-tenor text-nomo-red leading-[1.1] mb-12 uppercase tracking-tight">
+          {post.title}
+        </h1>
+
+        {/* Головне зображення */}
+        {post.mainImage && (
+          <div className="mb-16 border border-nomo-red/10 overflow-hidden shadow-sm">
+            <img 
+              src={urlFor(post.mainImage).url()} 
+              alt={post.title} 
+              className="w-full h-auto grayscale-[20%] hover:grayscale-0 transition-all duration-700" 
+            />
+          </div>
         )}
-      </div>
-    </article>
+
+        {/* Текст статті (Rich Text) */}
+        <div className="prose prose-nomo font-montserrat text-nomo-red leading-relaxed text-lg opacity-90">
+          <PortableText value={post.body} />
+        </div>
+
+      </article>
+    </main>
   );
 };
 

@@ -32,22 +32,14 @@ const Home = () => {
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-nomo-red text-nomo-beige selection:bg-nomo-beige selection:text-nomo-red flex flex-col">
-        {/* Шапка на всіх сторінках */}
-        <Navbar />
-        
-        {/* Роутер перемикає контент між шапкою і футером */}
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<PostPage />} />
-          </Routes>
-        </div>
-
-        {/* Футер на всіх сторінках */}
-        <Footer />
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<Blog />} /> 
+        {/* Динамічний роут для кожної статті */}
+        <Route path="/blog/:slug" element={<PostPage />} />
+      </Routes>
+      <Footer />
     </Router>
   );
 }
