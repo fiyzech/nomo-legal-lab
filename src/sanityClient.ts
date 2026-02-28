@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createClient } from '@sanity/client';
 import createImageUrlBuilder from '@sanity/image-url';
 
 export const client = createClient({
-  projectId: 'e5s6wnrw', 
+  projectId: 'e5s6wnrw', // Твій ID
   dataset: 'production',
-  useCdn: true,
+  useCdn: true, // true для швидкого завантаження (кеш), false для миттєвого оновлення даних
   apiVersion: '2024-02-28',
 });
 
 const builder = createImageUrlBuilder(client);
 
-// Використовуємо вбудований тип Record для об'єктів Sanity
-export const urlFor = (source: Record<string, unknown> | null | undefined) => {
-  if (!source) return { url: () => '' }; // Захист від пустих даних
+// Функція для перетворення об'єктів Sanity Image на посилання
+export const urlFor = (source: any) => {
   return builder.image(source);
 };
